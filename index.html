@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENTURELY</title>
+    
+    <style>
+        .header-container {
+            background-color: #009688;
+            color: white !important;
+            text-align: left;
+            padding: 10px 15px;
+            /*width: 500px;*/
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .header-container h1,
+        .header-container p {
+            color: white !important;
+        }
+
+        body, h1, h2, h3, p, ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #009688;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            width: 250px; /* Slightly wider for better usability */
+            padding: 8px;
+            font-size: 16px;
+            border: 2px solid #009688; /* Subtle border */
+            border-radius: 5px; /* Smooth corners */
+            outline: none; /* Removes default focus outline */
+            transition: 0.3s ease-in-out; /* Smooth transition for hover/focus effects */
+        }
+
+        input:focus {
+            border-color: #00796b; /* Darker border on focus */
+            box-shadow: 0px 0px 5px rgba(0, 121, 107, 0.5); /* Glow effect */
+        }
+
+        
+        button {
+            background-color: #009688;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #00796b;
+        }
+        
+        section {
+            margin-top: 20px;
+        }
+        
+        h3 {
+            color: #009688;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        img {
+            width: 500px; /* Set the width to 500px */
+            height: auto; /* Keep aspect ratio */
+            display: block;
+            margin: 10px auto;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .login-button {
+            float: right; /* Align to the right */
+            background-color: white;
+            color: #009688;
+            border: 2px solid #009688;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            border: 2px solid;
+            border-color: white;
+        }
+
+        .login-button:hover {
+            transition-duration: 0.2s;
+            background-color: #009688;
+            color: white;
+            border: 2px solid;
+            border-color: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Footer Styles */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>  
+    <header>
+        <div class="header-container">
+            <h1>VENTURELY</h1>
+            <p>Your Travel Guide</p>
+            <button class="login-button" onclick="window.location.href='login.html'">Login/Sign up</button>
+        </div>
+    </header>
+
+
+    <form id="searchForm">
+        <label for="place_name">Enter Place Name:</label>
+        <input type="text" id="place_name" name="place_name" required>
+        <button type="submit">Search</button>
+    </form>
+    
+    <button id="randomPlaceButton">Surprise Me!</button>
+    
+    <section id="result"></section>
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 EDGO Pvt Ltd. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>   
+        <p><a href="#">Instagram</a> | <a href="#">YouTube</a> | <a href="#">LinkedIn</a> | <a href="#">Twitter/X</a></p>
+    </footer>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('places.txt');
+            const data = await response.text();
+            return data.split('\n').map(line => line.split('|'));
+        }
+        
+        document.getElementById('searchForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const placeName = document.getElementById('place_name').value.trim().toLowerCase();
+            const places = await fetchData();
+            
+            const place = places.find(p => p[1]?.trim().toLowerCase() === placeName);
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+            
+            if (place) {
+                resultDiv.innerHTML = `
+                    <h2>${place[1]}</h2>
+                    <p>${place[2]}</p>
+                    <img src="${place[3]}" alt="${place[1]}">
+                `;
+            } else {
+                resultDiv.innerHTML = '<h2>Place Not Found</h2>';
+            }
+        });
+        document.getElementById('randomPlaceButton').addEventListener('click', async function() {
+            const places = await fetchData();
+            const randomPlace = places[Math.floor(Math.random() * places.length)];
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h2>${randomPlace[1]}</h2>
+                <p>${randomPlace[2]}</p>
+                <img src="${randomPlace[3]}" alt="${randomPlace[1]}">
+            `;
+        });
+    </script>
+</body>
+
+</html>
