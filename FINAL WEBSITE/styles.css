@@ -1,0 +1,155 @@
+
+body {
+    background: #5C7285;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 20vw;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: black;
+    background-color: #dddddd;
+    overflow: hidden;
+}
+
+li {
+    display: inline;
+}
+
+
+li a {
+    display: block;
+    padding: 14px 16px;
+    background-color: #dddddd;
+    text-align: center;
+}
+
+.login-button:hover {
+    background-color: #929292;
+}
+
+.button {
+    border: 2px solid #fff;
+    border-radius: 8px;
+    padding: 16px 12px;
+    color: #fff;
+    transition: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.button:hover {
+    border: 2px solid #5C7285;
+    background-color: #E50046;
+    transform: scale(1.15);
+}
+
+.footer {
+    margin-top: 150px;
+    width: 75%;
+    padding: 100px 15%;
+    background: #333;
+    color: #efefef;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer div {
+    text-align: center;
+}
+
+.col-2 {
+    flex-grow: 2;
+}
+
+.footer div h3 {
+    font-weight: 300;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.col-1 a {
+    display: block;
+    text-decoration: none;
+    color: #efefef;
+    margin-bottom: 10px;
+}
+
+form input {
+    width: 400px;
+    height: 45px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    outline: none;
+    border: none;
+}
+
+form button {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.social-icons {
+    margin-top: 3px;
+}
+
+.social-icons svg {
+    font-size: 22px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Utility classes */
+.dark {
+    background: #5C7285;
+}
+
+.magenta {
+    background: #E50046;
+}
+
+.spacer {
+    aspect-ratio: 960/300;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.layer1 {
+    background-image: url('layered-waves-haikei(1).svg');
+}
+
+.flip {
+    transform: rotate(180deg);
+}
